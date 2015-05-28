@@ -1,6 +1,9 @@
 label,sublabel,description,styles,bgcolor
 燃えるごみ,,,img/moyasu.svg,#ea3b13
 燃えないごみ,,,img/moyasanai.svg,#733b96
-空ビン,,,img/sigen.svg,#77ae1f
-プラ容器,,,img/bin.svg,#2dc7aa
-資源物,,,img/sigen.svg,#bbe400
+拠点収集Ａ,,,img/shigen.svg,#77ae1f
+拠点収集Ｂ,,,img/shigen.svg,#2dc7aa
+プラ容器,,,img/shigen.svg,#bbe400
+ペットボトル,,,img/shigen.svg,#81d12e
+空ビン,,,img/shigen.svg,#27a047
+資源物,,,img/shigen.svg,#08b925
