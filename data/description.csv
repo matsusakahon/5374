@@ -1,6 +1,6 @@
 label,sublabel,description,styles,bgcolor
 燃えるごみ,,,img/moyasu02.svg,#ea3b13
 燃えないごみ,,,img/moyasanai02.svg,#733b96
-プラ容器,,,img/shigen02.svg,#bbe400
-空ビン,,,img/shigen02.svg,#27a047
+プラ容器,,,img/shigen.svg,#bbe400
+空ビン,,,img/bin02.svg,#27a047
 資源物,,,img/shigen02.svg,#08b925
