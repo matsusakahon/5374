@@ -33,9 +33,15 @@ var AreaModel = function() {
     名前が一致するかどうかで判定を行っております。
   */
   this.setCenter = function(center_data) {
+    // 2016/07/14 t.kosaka 判定用に当日日付を取得
+    var now = new Date();
     for (var i in center_data) {
       if (this.centerName == center_data[i].name) {
-        this.center = center_data[i];
+        // 2016/07/14 t.kosaka 当日を含む直近未来日を設定するように修正
+        if (center_data[i].endDate >= now) {
+          this.center = center_data[i];
+          break;
+        }
       }
     }
   }
