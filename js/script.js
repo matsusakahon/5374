@@ -4,6 +4,8 @@
   エリア(ごみ処理の地域）を管理するクラスです。
 */
 var AreaModel = function() {
+  // 2016.07.19 t.kosaka 管内エリア判別のための属性を追加
+  this.area_type;
   this.label;
   this.centerName;
   this.center;
@@ -306,13 +308,16 @@ $(function() {
       var area_days_label = tmp.shift();
       for (var i in tmp) {
         var row = tmp[i];
+        // 2016.07.19 t.kosaka area_days.csvの先頭に管内エリアを追加したため、読み込みを1列ずらす
         var area = new AreaModel();
-        area.label = row[0];
-        area.centerName = row[1];
+        area.area_type = row[0]
+        area.label = row[1];
+        area.centerName = row[2];
 
         areaModels.push(area);
-        //２列目以降の処理
-        for (var r = 2; r < 2 + MaxDescription; r++) {
+        // 2016.07.19 t.kosaka area_days.csvの先頭に管内エリアを追加したため、読み込みを1列ずらす
+        //３列目以降の処理
+        for (var r = 3; r < 3 + MaxDescription; r++) {
           if (area_days_label[r]) {
             var trash = new TrashModel(area_days_label[r], row[r]);
             area.trash.push(trash);
