@@ -354,11 +354,15 @@ $(function() {
         // 2016.07.19 t.kosaka area_days.csvの先頭に追加した管内エリアをリスト化する
         var selected_type = getSelectedAreaType();
         var area_type_select_form = $("#select_area_type");
+        var area_exists_arr = new Array();
         var select_html = '<option value="-1">管内エリアを選択してください</option>';
         for (var row_index in areaModels) {
           var area_type = areaModels[row_index].area_type;
-          var selected = (selected_type == area_type) ? 'selected="selected"' : "";
-          select_html += '<option value="' + area_type + '" ' + selected + " >" + area_type + "</option>";
+          if (area_exists_arr.lastIndexOf(area_type) <= area_exists_arr.length) {
+            area_exists_arr[area_exists_arr] = area_type;
+            var selected = (selected_type == area_type) ? 'selected="selected"' : "";
+            select_html += '<option value="' + area_type + '" ' + selected + " >" + area_type + "</option>";
+          }
         }
         area_type_select_form.html(select_html);
         area_type_select_form.change();
