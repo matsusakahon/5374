@@ -358,7 +358,7 @@ $(function() {
         var select_html = '<option value="-1">管内エリアを選択してください</option>';
         for (var row_index in areaModels) {
           var area_type = areaModels[row_index].area_type;
-          if (area_exists_arr.lastIndexOf(area_type) <= area_exists_arr.length) {
+          if (area_exists_arr.indexOf(area_type) < 0) {
             area_exists_arr[area_exists_arr] = area_type;
             var selected = (selected_type == area_type) ? 'selected="selected"' : "";
             select_html += '<option value="' + area_type + '" ' + selected + " >" + area_type + "</option>";
