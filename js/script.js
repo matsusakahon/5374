@@ -359,7 +359,7 @@ $(function() {
         for (var row_index in areaModels) {
           var area_type = areaModels[row_index].area_type;
           if (area_exists_arr.indexOf(area_type) < 0) {
-            area_exists_arr[area_exists_arr] = area_type;
+            area_exists_arr[area_exists_arr.length] = area_type;
             var selected = (selected_type == area_type) ? 'selected="selected"' : "";
             select_html += '<option value="' + area_type + '" ' + selected + " >" + area_type + "</option>";
           }
