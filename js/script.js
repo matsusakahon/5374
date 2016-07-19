@@ -274,6 +274,14 @@ $(function() {
   var areaModels = new Array();
 /*   var descriptions = new Array(); */
 
+  // 2016.07.19 t.kosaka 管内エリアのsetter, getterを追加
+  function getSelectedAreaType() {
+    return localStorage.getItem("selected_area_type");
+  }
+
+  function setSelectedAreaType(area_type) {
+    localStorage.setItem("selected_area_type", area_type);
+  }
 
   function getSelectedAreaName() {
     return localStorage.getItem("selected_area_name");
@@ -343,18 +351,28 @@ $(function() {
           area.setCenter(center_data);
         };
         //エリアとゴミ処理センターを対応後に、表示のリストを生成する。
+        // 2016.07.19 t.kosaka area_days.csvの先頭に追加した管内エリアをリスト化する
+        var selected_type = getSelectedAreaType();
+        var area_type_select_form = $("#select_area_type");
+        var select_html = '<option value="-1">管内エリアを選択してください</option>';
+        for (var row_index in areaModels) {
+          var area_type = areaModels[row_index].area_type;
+          var selected = (selected_type == area_type) ? 'selected="selected"' : "";
+          select_html += '<option value="' + area_type + '" ' + selected + " >" + area_type + "</option>";
+        }
+        area_type_select_form.html(select_html);
+        area_type_select_form.change();
+      
         //ListメニューのHTML作成
         var selected_name = getSelectedAreaName();
         var area_select_form = $("#select_area");
-        var select_html = "";
-        select_html += '<option value="-1">自治会又は地域を選択（詳細は各自治会へ）</option>';
+        select_html = '<option value="-1"></option>';
         for (var row_index in areaModels) {
           var area_name = areaModels[row_index].label;
           var selected = (selected_name == area_name) ? 'selected="selected"' : "";
-
           select_html += '<option value="' + row_index + '" ' + selected + " >" + area_name + "</option>";
         }
-
+        
         //デバッグ用
         if (typeof dump == "function") {
           dump(areaModels);
@@ -512,6 +530,25 @@ if(descriptions.length>5){
     });
   }
 
+  // 2016.07.19 t.kosaka 管内エリア選択時の動的HTML生成
+  function onChangeType(area_type) {　
+    setSelectedAreaType(area_type);
+    var selected_name = getSelectedAreaName();
+    var area_select_form = $("#select_area");
+    select_html = '<option value="-1">自治会又は地域を選択（詳細は各自治会へ）</option>';
+    for (var row_index in areaModels) {
+      var area_name = areaModels[row_index].label;
+      if (area_type == areaModels[row_index].area_type) {
+        var selected = (selected_name == area_name) ? 'selected="selected"' : "";
+        select_html += '<option value="' + row_index + '" ' + selected + " >" + area_name + "</option>";
+      }
+    }
+    //HTMLへの適応
+    area_select_form.html(select_html);
+    area_select_form.change();
+
+  }
+  
   function onChangeSelect(row_index) {　
     if (row_index == -1) {
       $("#accordion").html("");
@@ -540,6 +577,12 @@ if(descriptions.length>5){
     }
     return -1;
   }
+  
+  // 2016.07.19 t.kosaka 管内エリアを選択した場合のアクション
+  $("#select_area_type").change(function(data) {
+    var row_index = $(data.target).val();
+    onChangeType(row_index);
+  });
   //リストが選択されたら
   $("#select_area").change(function(data) {
     var row_index = $(data.target).val();
