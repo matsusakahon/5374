@@ -371,19 +371,10 @@ $(function() {
         var selected_name = getSelectedAreaName();
         var area_select_form = $("#select_area");
         select_html = '<option value="-1"></option>';
-        for (var row_index in areaModels) {
-          var area_name = areaModels[row_index].label;
-          var selected = (selected_name == area_name) ? 'selected="selected"' : "";
-          select_html += '<option value="' + row_index + '" ' + selected + " >" + area_name + "</option>";
-        }
-        
-        //デバッグ用
-        if (typeof dump == "function") {
-          dump(areaModels);
-        }
         //HTMLへの適応
         area_select_form.html(select_html);
         area_select_form.change();
+        area_select_form.attr('readonly', true);
       });
     });
   }
@@ -539,18 +530,27 @@ if(descriptions.length>5){
     setSelectedAreaType(area_type);
     var selected_name = getSelectedAreaName();
     var area_select_form = $("#select_area");
-    var select_html = '<option value="-1">自治会又は地域を選択（詳細は各自治会へ）</option>';
-    for (var row_index in areaModels) {
-      var area_name = areaModels[row_index].label;
-      if (area_type == areaModels[row_index].area_type) {
-        var selected = (selected_name == area_name) ? 'selected="selected"' : "";
-        select_html += '<option value="' + row_index + '" ' + selected + " >" + area_name + "</option>";
-      }
-    }
-    //HTMLへの適応
-    area_select_form.html(select_html);
-    area_select_form.change();
 
+    if (area_type == -1) {
+      var select_html = '<option value="-1"></option>';
+      area_select_form.html(select_html);
+      area_select_form.change();
+      area_select_form.attr('readonly', true);
+      
+    } else {
+      var select_html = '<option value="-1">自治会又は地域を選択（詳細は各自治会へ）</option>';
+      for (var row_index in areaModels) {
+        var area_name = areaModels[row_index].label;
+        if (area_type == areaModels[row_index].area_type) {
+          var selected = (selected_name == area_name) ? 'selected="selected"' : "";
+          select_html += '<option value="' + row_index + '" ' + selected + " >" + area_name + "</option>";
+        }
+      }
+      //HTMLへの適応
+      area_select_form.html(select_html);
+      area_select_form.change();
+      area_select_form.attr('readonly', false);
+    }
   }
   
   function onChangeSelect(row_index) {　
