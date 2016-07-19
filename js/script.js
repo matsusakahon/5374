@@ -539,7 +539,7 @@ if(descriptions.length>5){
     setSelectedAreaType(area_type);
     var selected_name = getSelectedAreaName();
     var area_select_form = $("#select_area");
-    select_html = '<option value="-1">自治会又は地域を選択（詳細は各自治会へ）</option>';
+    var select_html = '<option value="-1">自治会又は地域を選択（詳細は各自治会へ）</option>';
     for (var row_index in areaModels) {
       var area_name = areaModels[row_index].label;
       if (area_type == areaModels[row_index].area_type) {
@@ -584,8 +584,8 @@ if(descriptions.length>5){
   
   // 2016.07.19 t.kosaka 管内エリアを選択した場合のアクション
   $("#select_area_type").change(function(data) {
-    var row_index = $(data.target).val();
-    onChangeType(row_index);
+    var value = $(data.target).val();
+    onChangeType(value);
   });
   //リストが選択されたら
   $("#select_area").change(function(data) {
