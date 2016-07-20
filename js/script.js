@@ -447,10 +447,10 @@ if(descriptions.length>5){
 
       for (var d_no in descriptions) {
         var description = descriptions[d_no];
-       if (description.label != trash.label) {
+        // 2016.07.20 t.kosaka リスト作成のスキップ条件を追加
+        if (description.label != trash.label　|| trash.mostRecent == null) {
           continue;
         }
-
           var target_tag = "";
           var furigana = "";
           var target_tag = "";
