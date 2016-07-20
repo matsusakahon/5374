@@ -444,11 +444,13 @@ if(descriptions.length>5){
     //アコーディオンの分類から対応の計算を行います。
     for (var i in areaModel.trash) {
       var trash = areaModel.trash[i];
-
+      // 2016.07.20 t.kosaka リスト作成のスキップ条件を追加
+      if (trash.mostRecent == null) {
+        continue;
+      }
       for (var d_no in descriptions) {
         var description = descriptions[d_no];
-        // 2016.07.20 t.kosaka リスト作成のスキップ条件を追加
-        if (description.label != trash.label　|| trash.mostRecent == null) {
+        if (description.label != trash.label) {
           continue;
         }
           var target_tag = "";
