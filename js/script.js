@@ -108,7 +108,11 @@ var TrashModel = function(_lable, _cell) {
   this.dayLabel = result_text;
 
   this.getDateLabel = function() {
-    var result_text = this.mostRecent.getFullYear() + "/" + (1 + this.mostRecent.getMonth()) + "/" + this.mostRecent.getDate();
+    // 2016.07.20 t.kosaka 例外処理を追加
+    var result_text = "";
+    if (this.mostRecent != null) {
+      result_text = this.mostRecent.getFullYear() + "/" + (1 + this.mostRecent.getMonth()) + "/" + this.mostRecent.getDate();
+    }
     return this.dayLabel + " " + result_text;
   }
 
